@@ -1,0 +1,6 @@
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+
+/* Add any basic styles here */
+body { @apply bg-white text-gray-800; }

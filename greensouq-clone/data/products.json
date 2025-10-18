@@ -1,0 +1,22 @@
+[
+    {
+        "id": "1",
+        "slug": "samsung-galaxy-s23",
+        "title": "Samsung Galaxy S23",
+        "price": 899,
+        "images": [
+            "/images/phone1.jpg"
+        ],
+        "description": "Flagship phone."
+    },
+    {
+        "id": "2",
+        "slug": "sony-headphones",
+        "title": "Sony Headphones",
+        "price": 199,
+        "images": [
+            "/images/headphones.jpg"
+        ],
+        "description": "Noise-cancelling"
+    }
+]
