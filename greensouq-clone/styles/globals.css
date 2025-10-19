@@ -4,3 +4,11 @@
 
 /* Add any basic styles here */
 body { @apply bg-white text-gray-800; }
+
+/* Add to your globals.css */
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}

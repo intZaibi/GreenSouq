@@ -29,7 +29,7 @@ export default function Home({ products }: HomeProps) {
         </div>
       </nav>
 
-      <main className="p-6">
+      <main>
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {products.map(p => (
             <div key={p.id} className="border p-4 rounded">

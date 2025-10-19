@@ -1,22 +1,39 @@
-// pages/api/favorites/[id].ts
-import { getSession } from "next-auth/react";
+import { NextResponse } from "next/server";
 import { prisma } from "../../../../../lib/prisma";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const session = await getSession({ req });
-  if (!session?.user?.email) return res.status(401).end();
+export async function DELETE(
+  req: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { params } = await context;
+  const id = (await params).id;
 
-  const user = await prisma.user.findUnique({ where: { email: session.user.email }});
-  if (!user) return res.status(401).end();
-
-  const id = req.query.id as string;
-
-  if (req.method === "DELETE") {
-    await prisma.favoriteSong.deleteMany({ where: { id, userId: user.id }});
-    return res.status(204).end();
+  const session = await getServerSession(authOptions);
+  if (!session || !session.user?.email) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  res.setHeader("Allow", ["DELETE"]);
-  res.status(405).end();
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email },
+  });
+
+  if (!user) {
+    return NextResponse.json({ error: "User not found" }, { status: 404 });
+  }
+
+  const favorite = await prisma.favoriteSong.findUnique({
+    where: { id },
+  });
+
+  if (!favorite || favorite.userId !== user.id) {
+    return NextResponse.json({ error: "Not found or unauthorized" }, { status: 404 });
+  }
+
+  await prisma.favoriteSong.delete({
+    where: { id },
+  });
+
+  return NextResponse.json({ message: "Favorite deleted successfully" });
 }
