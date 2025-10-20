@@ -1,7 +1,8 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+// lib/auth.ts
+import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { prisma } from "./prisma";
 import { compare } from "bcryptjs";
+import { getPrisma } from "./prisma";
 
 export const authOptions: NextAuthOptions = {
   session: { strategy: "jwt" },
@@ -16,6 +17,8 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials.password) {
           throw new Error("Missing email or password");
         }
+
+        const prisma = getPrisma(); // ✅ use lazily
 
         const user = await prisma.user.findUnique({
           where: { email: credentials.email },
@@ -48,7 +51,6 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token && session.user) {
-        /* eslint-disable */
         (session.user as any).id = token.id;
       }
       return session;
