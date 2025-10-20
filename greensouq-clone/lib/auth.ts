@@ -51,6 +51,7 @@ export const authOptions: NextAuthOptions = {
     },
     async session({ session, token }) {
       if (token && session.user) {
+        /* eslint-disable */
         (session.user as any).id = token.id;
       }
       return session;
