@@ -1,11 +1,11 @@
 // lib/prisma.ts
 import { PrismaClient } from "@prisma/client";
 
-let prisma: PrismaClient;
+let client: PrismaClient;
 
-export function getPrisma() {
-  if (!prisma) {
-    prisma = new PrismaClient();
+export function prisma() {
+  if (!client) {
+    client = new PrismaClient();
   }
-  return prisma;
+  return client;
 }
