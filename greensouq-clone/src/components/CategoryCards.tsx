@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function CategoryCards() {
@@ -54,15 +55,15 @@ export default function CategoryCards() {
   ];
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="bg-white py-16">
+      <div className="mx-auto px-4 max-w-7xl">
         {/* Title */}
-        <h2 className="text-2xl text-center mb-10 text-gray-800">
+        <h2 className="mb-10 text-gray-800 text-2xl text-center">
           Top Categories this Week
         </h2>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((category) => (
             <Link
               key={category.id}
@@ -70,8 +71,10 @@ export default function CategoryCards() {
               className="group flex flex-col items-center text-center cursor-pointer"
             >
               {/* Image */}
-              <div className="w-70 h-70 rounded-full overflow-hidden shadow-md transition-transform duration-500 group-hover:scale-105">
-                <img
+              <div className="shadow-md rounded-full w-70 h-70 overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <Image
+                  width={500}
+                  height={500}
                   src={category.image}
                   alt={category.title}
                   className="w-full h-full object-cover"
@@ -79,7 +82,7 @@ export default function CategoryCards() {
               </div>
 
               {/* Title */}
-              <h3 className="mt-4 text-lg font-semibold text-gray-700 group-hover:text-green-700 transition">
+              <h3 className="mt-4 font-semibold text-gray-700 group-hover:text-green-700 text-lg transition">
                 {category.title}
               </h3>
             </Link>

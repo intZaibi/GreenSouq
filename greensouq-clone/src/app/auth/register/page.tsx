@@ -20,6 +20,7 @@ export default function Register() {
       await axios.post("/api/auth/register", { name, email, password: pw });
       toast.success("Account created successfully!");
       router.push("/auth/login");
+      /* eslint-disable */
     } catch (err: any) {
       toast.error(err?.response?.data?.message || "Registration failed!");
       console.error(err);
@@ -29,9 +30,9 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-      <div className="bg-white w-full max-w-md rounded-xl shadow-md p-6">
-        <h1 className="text-2xl font-bold text-center text-green-700 mb-6">
+    <div className="flex justify-center items-center bg-gray-50 px-4 min-h-screen">
+      <div className="bg-white shadow-md p-6 rounded-xl w-full max-w-md">
+        <h1 className="mb-6 font-bold text-green-700 text-2xl text-center">
           Create an Account
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -39,21 +40,21 @@ export default function Register() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Full Name"
-            className="w-full p-3 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full text-black"
           />
           <input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             type="email"
-            className="w-full p-3 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full text-black"
           />
           <input
             value={pw}
             onChange={(e) => setPw(e.target.value)}
             placeholder="Password"
             type="password"
-            className="w-full p-3 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+            className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 w-full text-black"
           />
 
           <button
@@ -68,7 +69,7 @@ export default function Register() {
             {loading ? (
               <span className="flex justify-center items-center gap-2">
                 <svg
-                  className="animate-spin h-5 w-5 text-white"
+                  className="w-5 h-5 text-white animate-spin"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -94,11 +95,11 @@ export default function Register() {
             )}
           </button>
 
-          <p className="text-center text-gray-600 text-sm mt-4">
+          <p className="mt-4 text-gray-600 text-sm text-center">
             Already have an account?{" "}
             <Link
               href="/auth/login"
-              className="text-green-600 hover:underline font-medium"
+              className="font-medium text-green-600 hover:underline"
             >
               Login here
             </Link>
