@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/../lib/prisma";
+import { prisma as prismaClient } from "@/../lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/../lib/auth";
 
@@ -15,7 +15,7 @@ export async function DELETE(
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const user = await prisma.user.findUnique({
+  const user = await prismaClient().user.findUnique({
     where: { email: session.user.email },
   });
 
@@ -23,7 +23,7 @@ export async function DELETE(
     return NextResponse.json({ error: "User not found" }, { status: 404 });
   }
 
-  const favorite = await prisma.favoriteSong.findUnique({
+  const favorite = await prismaClient().favoriteSong.findUnique({
     where: { id },
   });
 
@@ -31,7 +31,7 @@ export async function DELETE(
     return NextResponse.json({ error: "Not found or unauthorized" }, { status: 404 });
   }
 
-  await prisma.favoriteSong.delete({
+  await prismaClient().favoriteSong.delete({
     where: { id },
   });
 
