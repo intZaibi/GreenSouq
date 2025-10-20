@@ -46,7 +46,7 @@ export default function Navbar() {
     >
       {/* First Row */}
       <div
-        className={`border-b transition-all duration-500 ${
+        className={` transition-all duration-500 ${
           isSecondRowVisible ? "py-2" : "py-1"
         }`}
         style={{ backgroundColor: "#a1d132" }}

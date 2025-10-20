@@ -38,14 +38,14 @@ export default function ProductPage() {
         <button className="w-full p-2 bg-black text-white rounded hover:bg-gray-800">
           Buy it now
         </button>
-        <p className="mt-2 text-gray-600 text-sm p-3">
+        <p className="mt-2 text-gray-600 text-sm p-3 bg-gray-100">
           <span className="text-black">⚬</span> Free returns on all eligible orders
           <br />
           You have 7 days to request a return. All sale items are final sale.
         </p>
         
         <p className="mt-4 text-black">
-          Garden Sweet Sand "Sweet Soil"
+           <h1 className="text-2xl text-black">Garden Sweet Sand "Sweet Soil"</h1>
           <br />
           Providing a garden with the best possible growing is medium essential for strong and
           healthy plants. They require a balance of air, water and nutrients to allow them to
